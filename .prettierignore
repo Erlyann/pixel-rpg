@@ -1,0 +1,9 @@
+# Cache, build, dependencies
+.angular/
+dist/
+node_modules/
+coverage/
+
+# Pliki konfiguracyjne środowiska i statyczne
+package-lock.json
+assets/

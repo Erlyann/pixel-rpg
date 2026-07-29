@@ -1,0 +1,30 @@
+# Główny plik konfiguracyjny (nie szukaj wyżej)
+root = true
+
+# Domyślne ustawienia dla wszystkich plików
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+end_of_line = lf
+
+# Pliki TypeScript i JavaScript
+[*.{ts,js}]
+quote_type = single
+max_line_length = 120
+
+# Szablony Angulara i style
+[*.{html,scss,css,less}]
+indent_size = 2
+max_line_length = 120
+
+# Pliki konfiguracyjne JSON
+[*.json]
+indent_size = 2
+
+# Pliki Markdown (wyłączamy ucinanie spacji na końcu, bo w MD oznaczają one nową linię)
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off
