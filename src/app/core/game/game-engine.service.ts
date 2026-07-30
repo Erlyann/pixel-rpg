@@ -10,6 +10,7 @@ import { WorldGeneratorService } from './world-generator.service';
 import { PlayerRenderer } from '../rendering/player-renderer';
 import { PlayerAnimation } from '../shared/enums/player-animation';
 import { animationFrames } from '../shared/consts/animation-frames';
+import { CollisionService } from './collision/collision.service';
 
 @Injectable({
    providedIn: 'root',
@@ -17,6 +18,7 @@ import { animationFrames } from '../shared/consts/animation-frames';
 export class GameEngineService {
    private readonly _inputManager = inject(InputManagerService);
    private readonly _worldGenerator = inject(WorldGeneratorService);
+   private readonly _collisionService = inject(CollisionService);
 
    private readonly _playerRenderer = new PlayerRenderer();
 
@@ -41,6 +43,14 @@ export class GameEngineService {
       animationFrame: 0,
 
       isMoving: false,
+
+      collision: {
+         offsetX: 2,
+         offsetY: 16,
+
+         width: 12,
+         height: 8,
+      },
    };
 
    private _playerAnimationTimer = 0;
@@ -139,8 +149,19 @@ export class GameEngineService {
 
       const movement = this._player.speed * (deltaTime / 16.67);
 
-      this._player.x += dx * movement;
-      this._player.y += dy * movement;
+      const nextX = this._player.x + dx * movement;
+      const nextY = this._player.y + dy * movement;
+
+      const canMoveX = this._canMoveTo(nextX, this._player.y);
+      const canMoveY = this._canMoveTo(this._player.x, nextY);
+
+      if (canMoveX) {
+         this._player.x = nextX;
+      }
+
+      if (canMoveY) {
+         this._player.y = nextY;
+      }
 
       this._clampPlayerToWorld();
    }
@@ -239,5 +260,21 @@ export class GameEngineService {
 
          this._ctx.fill();
       }
+   }
+
+   private _canMoveTo(x: number, y: number): boolean {
+      if (!this._world) {
+         return false;
+      }
+
+      for (const object of this._world.objects) {
+         const collision = this._collisionService.checkCollision(this._player, x, y, object);
+
+         if (collision) {
+            return false;
+         }
+      }
+
+      return true;
    }
 }

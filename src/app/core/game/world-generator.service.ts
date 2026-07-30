@@ -78,8 +78,8 @@ export class WorldGeneratorService {
                x: x + 10,
                y: y + 32,
 
-               width: 12,
-               height: 12,
+               width: 10,
+               height: 10,
             },
          });
       }
