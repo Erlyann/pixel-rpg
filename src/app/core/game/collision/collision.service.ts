@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Player } from '../../shared/models/player.model';
-import { WorldObject } from '../../shared/models/world-object.model';
+import { Player } from '../player/player.model';
+import { WorldObject } from '../world/world-object.model';
 
 @Injectable({
    providedIn: 'root',

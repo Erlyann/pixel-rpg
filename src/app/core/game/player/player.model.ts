@@ -1,6 +1,6 @@
-import { Direction } from '../enums/direction.enum';
-import { PlayerAnimation } from '../enums/player-animation';
-import { CollisionBox } from './collision-box.model';
+import { Direction } from '../../shared/enums/direction.enum';
+import { PlayerAnimation } from './player-animation.enum';
+import { CollisionBox } from '../collision/collision-box.model';
 
 export interface Player {
    x: number;

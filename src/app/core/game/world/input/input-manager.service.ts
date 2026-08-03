@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { InputState } from '../shared/models/input-state.model';
+import { InputState } from './input-state.model';
 
 @Injectable({
    providedIn: 'root',

@@ -1,4 +1,4 @@
-import { Player } from '../shared/models/player.model';
+import { Player } from '../game/player/player.model';
 
 export class PlayerRenderer {
    private _spriteSheet = new Image();
